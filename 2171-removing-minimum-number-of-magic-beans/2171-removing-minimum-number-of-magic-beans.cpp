@@ -4,24 +4,17 @@ public:
     {
         int n=v.size();
         long long sum=0,ans=1e18-1;
-        multiset<long long> m;
+        sort(v.begin(),v.end());
         for(auto x:v)
         {
-            m.insert(x);
             sum+=x;
         }
-        long long z=n;
-        auto it=m.begin();
+        
         for(long long i=0;i<=100000;i++)
         {
-            long long var=sum-i*z;
-            ans=min(ans,var);
-            
-            while(it!=m.end() && (*it==i))
-            {
-                it++;
-                z--;
-            }
+            auto it=v.end()-lower_bound(v.begin(),v.end(),i);
+            long long var=sum-i*it;
+           ans=min(ans,var);
         }
         
         return ans;
