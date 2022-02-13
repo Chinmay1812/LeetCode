@@ -10,10 +10,10 @@ public:
             sum+=x;
         }
         
-        for(long long i=0;i<=100000;i++)
+        for(auto x:v)
         {
-            auto it=v.end()-lower_bound(v.begin(),v.end(),i);
-            long long var=sum-i*it;
+            auto it=v.end()-lower_bound(v.begin(),v.end(),x);
+            long long var=sum-x*it;
            ans=min(ans,var);
         }
         
