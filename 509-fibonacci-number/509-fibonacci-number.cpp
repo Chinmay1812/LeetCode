@@ -11,6 +11,10 @@ public:
         {
             return m[1]=1;
         }
+        if(m[n]>0)
+        {
+            return m[n];
+        }
         
         return m[n]=fib(n-1)+fib(n-2);
     }
