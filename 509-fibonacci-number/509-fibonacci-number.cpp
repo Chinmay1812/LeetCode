@@ -1,21 +1,24 @@
 class Solution {
 public:
-    unordered_map<int,int> m;
+
     int fib(int n) 
     {
         if(n==0)
         {
-            return m[0]=0;
+            return 0;
         }
         if(n==1)
         {
-            return m[1]=1;
+            return 1;
         }
-        if(m[n]>0)
+        int first=0,second=1;
+        int cur;
+        for(int i=2;i<=n;i++)
         {
-            return m[n];
+            cur=first+second;
+            first=second;
+            second=cur;
         }
-        
-        return m[n]=fib(n-1)+fib(n-2);
+        return cur;
     }
 };
