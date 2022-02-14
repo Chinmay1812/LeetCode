@@ -18,6 +18,28 @@ public:
             return 0;
         }
         
-        return 1+max(maxDepth(root->left),maxDepth(root->right));
+        queue<TreeNode*> q;
+        q.push(root);
+        int c=0;
+        while(!q.empty())
+        {
+            c++;
+            int n=q.size();
+            for(int i=0;i<n;i++)
+            {
+                auto first=q.front();
+                q.pop();
+                if(first->left)
+                {
+                    q.push(first->left);
+                }
+                if(first->right)
+                {
+                    q.push(first->right);
+                }
+            }
+            
+        }
+     return c;
     }
 };
