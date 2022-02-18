@@ -4,12 +4,12 @@ public:
 
 
 int parent[100001];
-int Sizes[100001];
+int rank[100001];
 
 void make(int v)
 {
     parent[v] = v;
-    Sizes[v] = 1;
+    rank[v] = 1;
 }
 
 int find(int v)
@@ -27,12 +27,21 @@ void Union(int a, int b)
     b = find(b);
     if (a != b)
     {
-        if (Sizes[a] < Sizes[b])
+        if(rank[a]>rank[b])
         {
-            swap(a, b);
+            parent[b]=a;
+            
         }
-        parent[b] = a;
-        Sizes[a] += Sizes[b];
+        else if(rank[a]<rank[b])
+        {
+            parent[a]=b;
+        }
+        else
+        {
+            parent[a]=b;
+            rank[b]++;
+        }
+        
     }
 
 
