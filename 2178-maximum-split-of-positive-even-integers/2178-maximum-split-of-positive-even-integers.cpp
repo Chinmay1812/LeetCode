@@ -1,31 +1,21 @@
 class Solution {
 public:
-    vector<long long> maximumEvenSplit(long long sum)
+    vector<long long> maximumEvenSplit(long long n)
     {
         vector<long long> v;
-        long long n=sum;
-        if(sum%2)
+        if(n%2)
         {
             return v;
         }
-        unordered_map<long long,int> m;
-        
-        int c=2;
-        while(sum>0)
+        long long c=2;
+        long long sum=0;
+        while(sum+c<=n)
         {
-            if(m[sum]==1)
-            {
-             v[v.size()-1]+=sum;
-                break;
-            }
-            sum-=c;
+            sum+=c;
             v.push_back(c);
-            m[c]=1;
             c+=2;
         }
-
-        
-        
+        v[v.size()-1]+=n-sum;
         
         return v;
     }
