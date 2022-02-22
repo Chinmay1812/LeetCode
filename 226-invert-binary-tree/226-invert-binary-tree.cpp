@@ -17,11 +17,25 @@ public:
         {
             return root;
         }
-        invertTree(root->left);
-        invertTree(root->right);
-        TreeNode* node=root->left;
-        root->left=root->right;
-        root->right=node;
+        
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty())
+        {
+            TreeNode* node=q.front();
+            TreeNode* copy=node->left;
+            node->left=node->right;
+            node->right=copy;
+            q.pop();
+            if(node->left)
+            {
+                q.push(node->left);
+            }
+            if(node->right)
+            {
+                q.push(node->right);
+            }
+        }
         return root;
     }
 };
