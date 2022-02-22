@@ -16,19 +16,23 @@ public:
         {
             return root;
         }
+       
+        while(1)
+        {
+        
         if(p->val<root->val && q->val<root->val)
         {
-            return lowestCommonAncestor(root->left,p,q);
+            root=root->left;
         }
-        if(p->val>root->val && q->val>root->val)
+        else if(p->val>root->val && q->val>root->val)
         {
-            return lowestCommonAncestor(root->right,p,q);
+            root=root->right;
         }
-        else
+      else
         {
             return root;
         }
-        
+    }
         return root;
     }
 };
