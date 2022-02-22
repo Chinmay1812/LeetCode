@@ -127,50 +127,25 @@ struct Node
  */
 
 //Function to return a list containing elements of left view of the binary tree.
-// vector<int> ans;
-
-// void fun(Node* root,int h)
-// {
-//     if(!root)
-//     {
-//         return;
-//     }
-//     if(ans.size()<h) ans.push_back(root->data);
-//     fun(root->left,h+1);
-//     fun(root->right,h+1);
-// }
 
 
-// vector<int> leftView(Node *root)
-// {
-//   // Your code here
-//   fun(root,1);
-//   return ans;
-// }
-void leftViewUtil(vector<int>&vec,struct Node *root, int level,int *max_level)
+void fun(Node* root,int h,vector<int>&ans)
 {
-    //if root is null, we simply return.
-    if (root==NULL)  return;
-    
-    //if this is the first node of its level then it is in the left view.
-    if (*max_level < level)
+    if(!root)
     {
-        //storing data of current node in list.
-        vec.push_back(root->data);
-        *max_level = level;
+        return;
     }
-    
-    //calling function recursively for left and right subtrees of current node. 
-    leftViewUtil(vec,root->left, level+1, max_level);
-    leftViewUtil(vec,root->right, level+1, max_level);
+    if(ans.size()<h) ans.push_back(root->data);
+    fun(root->left,h+1,ans);
+    fun(root->right,h+1,ans);
 }
 
-//Function to return a list containing elements of left view of the binary tree.
-vector<int> leftView(struct Node *root)
+
+vector<int> leftView(Node *root)
 {
-    int max_level = 0;
-    vector<int> vec;
-    leftViewUtil(vec,root, 1, &max_level);
-    //returning the list.
-    return vec;
+  // Your code here
+  vector<int> ans;
+  fun(root,1,ans);
+  return ans;
 }
+
