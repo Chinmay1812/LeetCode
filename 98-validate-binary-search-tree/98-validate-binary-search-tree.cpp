@@ -9,33 +9,33 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution
-{
+class Solution {
 public:
-    
-    bool isTree(TreeNode* root,long long l,long long r)
+    bool isValidBST(TreeNode* root)
     {
         if(!root)
-        {
-            return 1;
-        }
-        
-        if(root->val<=l || root->val>=r)
         {
             return 0;
         }
-        
-        return (isTree(root->left,l,root->val)&isTree(root->right,root->val,r));
-       
-    }
-    
-    bool isValidBST(TreeNode* root) 
-    {
-        if(!root)
+        stack<TreeNode*> s;
+        TreeNode* prev=NULL;
+        while(!s.empty() || root)
         {
-            return 1;
+            while(root!=NULL)
+            {
+                s.push(root);
+                root=root->left;
+            }
+            root=s.top();
+            s.pop();
+            
+            if(prev!=NULL && root->val<=prev->val)
+            {
+                return 0;
+            }
+            prev=root;
+            root=root->right;
         }
-        
-        return isTree(root,-1e17,1e17);
+        return 1;
     }
 };
