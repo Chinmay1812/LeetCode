@@ -4,28 +4,27 @@ public:
     {
         int n=v.size();
         int m=v[0].size();
-        vector<pair<int,int>> z;
+      unordered_map<int,int> row,col;
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
                 if(v[i][j]==0)
                 {
-                    z.push_back({i,j});
+                    row[i]=1;
+                    col[j]=1;
                 }
             }
         }
-        for(auto x:z)
+        for(int i=0;i<n;i++)
         {
-            int row=x.first;
-            int col=x.second;
-            for(int i=0;i<n;i++)
+            for(int j=0;j<m;j++)
             {
-                v[i][col]=0;
-            }
-            for(int i=0;i<m;i++)
-            {
-                v[row][i]=0;
+                if(row[i]||col[j])
+                {
+                    v[i][j]=0;
+                }
+                
             }
            
         }
