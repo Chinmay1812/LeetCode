@@ -1,22 +1,21 @@
 class Solution {
 public:
-    vector<int> plusOne(vector<int>&v)
+    vector<int> plusOne(vector<int>&v) 
     {
-        int n=v.size();
-        vector<int> ans;
-        int c=1;
-        for(int i=n-1;i>=0;i--)
+        for(int i=v.size()-1;i>=0;i--)
         {
-                int x=v[i]+c;
-                ans.push_back(x%10);
-                c=x/10;
+            if(v[i]==9)
+            {
+                v[i]=0;
+            }
+            else
+            {
+                v[i]++;
+                return v;
+            }
         }
-        if(c)
-        {
-            ans.push_back(c);
-        }
-        
-        reverse(ans.begin(),ans.end());
-        return ans;
+        v[0]=1;
+        v.push_back(0);
+        return v;
     }
 };
