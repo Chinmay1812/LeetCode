@@ -20,10 +20,14 @@ class Solution {
                }
               
             }
-            else if(f[x]==1 && )
+            else if(f[x]==1 && vis[x]==1)
             {
                 return 1;
             }
+            // else if(vis[x]==1 && f[x]==0)
+            // {
+            //     return 0;
+            // }
           
         }
        f[u]=0;
