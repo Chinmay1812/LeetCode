@@ -14,13 +14,13 @@ class Solution {
         {
             if(!vis[x])
             {
-                 if(cycle(x,vis,f,adj))
-                 {
-                     return 1;
-                 }
-          
+               if(cycle(x,vis,f,adj))
+               {
+                   return 1;
+               }
+              
             }
-            else if(f[x]==1)
+            else if(f[x]==1 && )
             {
                 return 1;
             }
