@@ -10,46 +10,27 @@
  */
 class Solution {
 public:
-    ListNode* mergeTwoLists(ListNode* head1, ListNode* head2)
+    ListNode* mergeTwoLists(ListNode* head1, ListNode* head2) 
     {
-        if(!head1)
+        if(head1==NULL)
         {
             return head2;
         }
-        if(!head2)
+        else if(head2==NULL)
         {
             return head1;
         }
         
-        ListNode* temp1=head1;
-        ListNode* temp2=head2;
-        ListNode* temp=new ListNode(0);
-        ListNode* ans=temp;
-        while(temp1!=NULL && temp2!=NULL)
+        if(head1->val<=head2->val)
         {
-            if(temp1->val<=temp2->val)
-            {
-                   temp->next=temp1;
-                   temp=temp->next;
-                   temp1=temp1->next; 
-            }
-            else
-            {
-                temp->next=temp2;
-                temp=temp->next;
-                temp2=temp2->next;
-            }
-            
+            head1->next=mergeTwoLists(head1->next,head2);
+            return head1;
         }
-        if(temp1)
+        else
         {
-           temp->next=temp1; 
+            head2->next=mergeTwoLists(head1,head2->next);
+            return head2;
         }
-        if(temp2)
-        {
-            temp->next=temp2;
-        }
-        
-        return ans->next;
+        return head1;
     }
 };
