@@ -3,11 +3,11 @@ public:
     MedianFinder() {
         
     }
-    priority_queue<int> q1;
-    priority_queue<int,vector<int>,greater<int>> q2;
+    priority_queue<int> q2;
+    priority_queue<int,vector<int>,greater<int>> q1;
     void addNum(int x) 
     {
-        if(q1.empty()||q1.top()>x)
+        if(q1.empty()||q1.top()<x)
         {
             q1.push(x);
         }
