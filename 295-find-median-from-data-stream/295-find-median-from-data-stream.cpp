@@ -1,61 +1,51 @@
 class MedianFinder {
 public:
+    multiset<int> s;
+    multiset<int>::iterator lo,hi;
+    
     MedianFinder() {
         
     }
-    priority_queue<int> q2;
-    priority_queue<int,vector<int>,greater<int>> q1;
+    
     void addNum(int x) 
     {
-        if(q1.empty()||q1.top()<x)
+        int n=s.size();
+        s.insert(x);
+        
+        if(n==0)
         {
-            q1.push(x);
+            lo=s.begin();
+            hi=s.begin();
+        }
+        else if(n&1)
+        {
+            if(x>=*hi)
+            {
+                hi++;
+            }
+            else
+            {
+                lo--;
+            }
         }
         else
         {
-            q2.push(x);
-        }
-        
-        if(q1.size()>q2.size()+1)
-        {
-            while(q1.size()>q2.size()+1)
+            if(x>=*hi)
             {
-                q2.push(q1.top());
-                q1.pop();
+                lo++;
             }
-        }
-        else if(q1.size()+1<q2.size())
-        {
-            while(q1.size()+1<q2.size())
+            else
             {
-                q1.push(q2.top());
-                q2.pop();
+                --hi;
+                lo=hi;
             }
         }
     }
     
-    double findMedian()
+    double findMedian() 
     {
-        double ans=0;
-        int n=q1.size()+q2.size();
-        if(n%2==0)
-        {
-            ans=q1.top()+q2.top();
-            return ans/2.0;
-        }
-        else
-        {
-            if(q1.size()>q2.size())
-            {
-                ans=q1.top();
-            }
-            else
-            {
-                ans=q2.top();
-            }
-            return ans/1.0;
-        }
-        
+        double ans=(*lo+*hi)/2.0;
+        return ans;
     }
 };
 
