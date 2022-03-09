@@ -18,21 +18,18 @@ public:
         }
         
         ListNode* temp=head;
-        ListNode* node=head;
-        while(temp!=NULL)
+        while(temp!=NULL && temp->next!=NULL)
         {
-            if(node->val==temp->val)
+            if(temp->val==temp->next->val)
             {
-                temp=temp->next;
+                temp->next=temp->next->next;
             }
             else
             {
-                node->next=temp;
-                node=node->next;
+                 temp=temp->next;
             }
-            
         }
-        node->next=NULL;
+        temp->next=NULL;
         return head;
     }
 };
