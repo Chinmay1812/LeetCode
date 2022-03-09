@@ -10,48 +10,29 @@
  */
 class Solution {
 public:
-    ListNode* deleteDuplicates(ListNode* head)
+    ListNode* deleteDuplicates(ListNode* head) 
     {
         if(!head || !head->next)
         {
             return head;
         }
-        unordered_map<int,int> m;
-        ListNode* temp=head;
-        while(temp!=NULL)
-        {
-            m[temp->val]++;
-            temp=temp->next;
-        }
-        temp=head;
-        ListNode *node=new ListNode(-1);
-        ListNode* ans;
-        while(temp!=NULL)
-        {
-            if(m[temp->val]>1)
-            {
-                temp=temp->next;
-            }
-            else if(m[temp->val]==1)
-            {
-                if(node->next==NULL)
-                {
-                    node->next=temp;
-                    ans=temp;
-                    temp=temp->next;
-                    node=node->next;
-                }
-                else
-                {
-                    node->next=temp;
-                    temp=temp->next;
-                    node=node->next; 
-                }
-            }
-        }
-        node->next=NULL;
         
-       
-        return ans;
+        int x=head->val;
+        int y=head->next->val;
+        
+        if(x!=y)
+        {
+            head->next=deleteDuplicates(head->next);
+        }
+        else
+        {
+            while(head && x==head->val)
+            {
+                head=head->next;
+            }
+           return deleteDuplicates(head);
+        }
+     
+        return head;
     }
 };
