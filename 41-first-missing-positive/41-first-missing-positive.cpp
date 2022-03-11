@@ -3,19 +3,30 @@ public:
     int firstMissingPositive(vector<int>&v) 
     {
         int n=v.size();
-      unordered_map<int,int> m;
+        for(auto &x:v)
+        {
+            if(x<=0) x=INT_MAX;
+        }
+        
         for(auto x:v)
         {
-            m[x]++;
+            x=abs(x);
+            if(x>0 && x<=n && v[x-1]>0)
+            {
+                v[x-1]*=-1;
+            }
         }
-    
-        for(int i=1;i<=n+1;i++)
+        
+        for(int i=1;i<=n;i++)
         {
-            if(m[i]==0)
+            if(v[i-1]>0)
             {
                 return i;
-            }            
+            }
+            
         }
-       return 0;
+        
+        
+        return n+1;
     }
 };
