@@ -6,7 +6,7 @@ public:
       unordered_map<int,int> m;
         for(auto x:v)
         {
-            m[x]++;
+          if(x>0)  m[x]++;
         }
     
         for(int i=1;i<1e6;i++)
