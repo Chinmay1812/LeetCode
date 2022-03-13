@@ -5,19 +5,6 @@ public:
         stack<int> st;
         int n=s.size();
         
-        int c=0;
-        for(int i=0;i<n;i++)
-        {
-            if(s[i]==')'||s[i]=='}'||s[i]==']')
-            {
-                c++;
-            }
-        }
-        if(c>n-c)
-        {
-            return 0;
-        }
-        
         for(int i=0;i<n;i++)
         {
            if(s[i]=='(')
@@ -46,6 +33,14 @@ public:
                 {
                     st.pop();
                 }
+                else
+                {
+                    return 0;
+                }
+            }
+            else if(st.size()==0 && s[i]==')'||s[i]=='}'||s[i]==']')
+            {
+                return 0;
             }
         }
         return st.empty();
