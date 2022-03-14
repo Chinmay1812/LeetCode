@@ -17,8 +17,25 @@ public:
         {
             return 0;
         }
+        int lh=1,rh=1;
+        TreeNode* temp=root;
+        while(temp->left)
+        {
+            lh++;
+            temp=temp->left;
+        }
+        temp=root;
+        while(temp->right)
+        {
+            lh++;
+            temp=temp->right;
+        }
+        
+        if(lh==rh)
+        {
+            return pow(2,lh)-1;
+        }
         
         return 1+countNodes(root->left)+countNodes(root->right);
-        
     }
 };
