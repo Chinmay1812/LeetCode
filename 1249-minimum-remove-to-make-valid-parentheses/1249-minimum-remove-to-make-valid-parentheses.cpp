@@ -53,7 +53,7 @@ public:
         {
             if(x!='#')
             {
-                ans+=x;
+                ans.push_back(x);
             }
         }
         
