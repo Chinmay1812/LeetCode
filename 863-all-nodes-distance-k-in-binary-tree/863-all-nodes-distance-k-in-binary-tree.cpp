@@ -7,68 +7,68 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-class Solution 
-{
+class Solution {
 public:
-    vector<int> adj[501];
-    vector<int> ans;
-    void dfs(TreeNode* root)
-    {
-        if(!root)
-        {
-            return;
-        }
-        if(root->left)
-        {
-            adj[root->val].push_back((root->left->val));
-             adj[(root->left->val)].push_back((root->val));
-        }
-        if(root->right)
-        {
-            adj[root->val].push_back(root->right->val);
-            adj[(root->right->val)].push_back((root->val));
-        }
-        dfs(root->left);
-        dfs(root->right);
-    }
-   
-  
-    void dfs2(int u,int k,vector<int> &vis,vector<int> &dis)
-    {
-        vis[u]=1;
-        for(auto x:adj[u])
-        {
-            if(!vis[x])
-            {
-                dis[x]=dis[u]+1;
-                dfs2(x,k,vis,dis);
-            }
-            
-        }
-        
-    }
-    
     vector<int> distanceK(TreeNode* root, TreeNode* node, int k) 
     {
-        int u=node->val;
-      
-        dfs(root);
-         vector<int> vis(501,0);
-          vector<int> dis(501,0);
-        
-        if(k==0)
+        unordered_map<TreeNode*,TreeNode*> parent;
+        unordered_map<TreeNode*,bool> vis;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty())
         {
-            ans.push_back(node->val);
-            return ans;
+            auto tree=q.front();
+            q.pop();
+            if(tree->left)
+            {
+                q.push(tree->left);
+                parent[tree->left]=tree;
+            }
+            if(tree->right)
+            {
+                q.push(tree->right);
+                parent[tree->right]=tree;
+            }
+        }
+        vector<int> ans;
+        q.push(node);
+        vis[node]=1;
+        int c=0;
+        while(!q.empty())
+        {
+          
+            if(c==k)
+            {
+                break;
+            }
+            c++;
+            int n=q.size();
+            for(int i=0;i<n;i++)
+            {
+              auto tree=q.front();
+            q.pop();
+            if(tree->left && !vis[tree->left])
+            {
+                q.push(tree->left);
+                vis[tree->left]=1;
+            }
+            if(tree->right && !vis[tree->right])
+            {
+                q.push(tree->right);
+                vis[tree->right]=1;
+            }
+            if(parent[tree] && !vis[parent[tree]])
+            {
+                q.push(parent[tree]);
+                vis[parent[tree]]=1;
+            }
+         }
         }
         
-        dfs2(u,k,vis,dis);
-        for(int i=0;i<501;i++)
+        while(!q.empty())
         {
-            if(dis[i]==k)
-            {
-                ans.push_back(i);
-            }
+            ans.push_back(q.front()->val);
+            q.pop();
         }
         return ans;
     }
