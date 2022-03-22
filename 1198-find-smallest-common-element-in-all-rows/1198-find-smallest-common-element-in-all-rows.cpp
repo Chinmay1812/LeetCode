@@ -5,19 +5,17 @@ public:
     
         int n=v.size();
         int m=v[0].size();
-        int ans=INT_MAX;
-        for(int k=0;k<m;k++)
+        int h[10001]={0};
+        for(int j=0;j<m;j++)
         {
-            int val=v[0][k];
-            int f=1;
-            for(int i=1;i<n;i++)
+            for(int i=0;i<n;i++)
             {
-               f&=binary_search(v[i].begin(),v[i].end(),val);
+                if(++h[v[i][j]]==n)
+                {
+                    return v[i][j];
+                }
             }
-            if(f)
-            {
-                return val;
-            }
+           
         }
         return -1;
     }
