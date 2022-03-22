@@ -16,9 +16,9 @@ public:
             }
             if(f)
             {
-                ans=min(ans,val);
+                return val;
             }
         }
-        return ans==INT_MAX?-1:ans;
+        return -1;
     }
 };
