@@ -13,50 +13,28 @@ class Solution {
 public:
     vector<vector<int>> ans;
     
-    bool isLeaf(TreeNode* root)
-    {
-        if(root->left==NULL && root->right==NULL)
-        {
-            return 1;
-        }
-        return 0;
-    }
-    
-    void preOrder(TreeNode* root,vector<int> &temp,unordered_map<TreeNode*,int> &m)
+    int dfs(TreeNode* root)
     {
         if(!root)
         {
-            return;
+            return 0;
         }
-        if(isLeaf(root))
-        {
-            m[root]=1;
-            temp.push_back(root->val);
-            return;
-        }
-        preOrder(root->left,temp,m);
-      if(m[root->left])  root->left=NULL;
-        preOrder(root->right,temp,m);
-        if(m[root->right]) root->right=NULL;
+        int level=1+max(dfs(root->left),dfs(root->right));
+        
+        if(level>ans.size()) ans.push_back(vector<int>());
+        
+        ans[level-1].push_back(root->val);
+        return level;
+        
     }
     
-    
-    vector<vector<int>> findLeaves(TreeNode* root)
+    vector<vector<int>> findLeaves(TreeNode* root) 
     {
         if(!root)
         {
             return ans;
         }
-        unordered_map<TreeNode*,int> m;
-        vector<int> temp;
-        
-        while(root->left!=NULL || root->right!=NULL)
-        {
-             temp.clear();
-             preOrder(root,temp,m);
-             ans.push_back(temp);
-        }
-        ans.push_back({root->val});
+        dfs(root);
         return ans;
     }
 };
