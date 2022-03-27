@@ -31,10 +31,8 @@ public:
         for(int i=0;i<n;i++)
         {
             int sum=0;
-            for(int j=0;j<m;j++)
-            {
-                sum+=a[i][j];
-            }
+            sum=n-(upper_bound(a[i].rbegin(),a[i].rend(),0)-a[i].rbegin());
+            
             three var;
             var.val=sum;
             var.row=i;
