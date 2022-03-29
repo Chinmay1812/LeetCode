@@ -2,17 +2,10 @@ class Solution {
 public:
     int findDuplicate(vector<int>&v) 
     {
-        unordered_map<int,int> m;
-        int ans;
-        for(auto x:v)
+        while(v[0]!=v[v[0]])
         {
-            if(m[x]==1)
-            {
-                return x;
-            }
-            m[x]++;
-            ans=x;
+            swap(v[0],v[v[0]]);
         }
-        return ans;
+        return v[0];
     }
 };
