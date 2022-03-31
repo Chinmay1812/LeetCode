@@ -9,6 +9,11 @@ public:
         int sum=0;
         for(int i=0;i<n;i++)
         {
+            if(v[i]>mid)
+            {
+                return false;
+            }
+            
             if(sum+v[i]<=mid)
             {
                 sum+=v[i];
@@ -19,15 +24,14 @@ public:
                 sum=v[i];
             }
         }
-        // cout<<c<<endl;
         return c<=m;
     }
     
     int splitArray(vector<int>&v, int m) 
     {
         int n=v.size();
-        long s=*max_element(v.begin(),v.end()),e=accumulate(v.begin(),v.end(),0);
-        int ans=1;
+        long s=0,e=1e9+1;
+        int ans=0;
         while(s<=e)
         {
             long mid=s+(e-s)/2;
