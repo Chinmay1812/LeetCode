@@ -39,7 +39,7 @@ public:
         vector<pair<int,int>> dir={{1,0},{-1,0},{0,1},{0,-1}};
          int n=v.size();
         int m=v[0].size();
-        int lo=0,hi=1e9+1;
+        int lo=0,hi=1e6+1;
         int ans;
         while(lo<=hi)
         {
