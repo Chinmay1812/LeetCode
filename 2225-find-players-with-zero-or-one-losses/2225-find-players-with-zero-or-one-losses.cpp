@@ -2,29 +2,22 @@ class Solution {
 public:
     vector<vector<int>> findWinners(vector<vector<int>>&v) 
     {
-        unordered_map<int,int> lose,win;
-        vector<vector<int>> ans(2,vector<int>());
+        set<int> s;
+        map<int,int> lose;
         for(auto x:v)
         {
+            s.insert(x[0]);
             lose[x[1]]++;
         }
-        for(auto x:v)
+        vector<int> v2;
+        for(auto [p,q]:lose)
         {
-            if(lose[x[0]]==0 && win[x[0]]==0)
+            if(q==1)
             {
-                ans[0].push_back(x[0]);
-                win[x[0]]=1;
+                v2.push_back(p);
             }
+            s.erase(p);
         }
-        for(auto x:v)
-        {
-            if(lose[x[1]]==1)
-            {
-                ans[1].push_back(x[1]);
-            }
-        }
-        sort(ans[0].begin(),ans[0].end());
-         sort(ans[1].begin(),ans[1].end());
-        return ans;
+        return {vector<int>(s.begin(),s.end()),v2};
     }
 };
