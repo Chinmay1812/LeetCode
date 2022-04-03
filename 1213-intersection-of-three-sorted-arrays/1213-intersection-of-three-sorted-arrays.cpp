@@ -2,19 +2,30 @@ class Solution {
 public:
     vector<int> arraysIntersection(vector<int>&v1, vector<int>&v2, vector<int>&v3) 
     {
-        unordered_map<int,int> m1,m2;
-        for(int i=0;i<v2.size();i++)
-        {
-            m1[v1[i]]++;
-            m2[v2[i]]++;
-        }
+        int n1=v1.size();
+        int n2=v2.size();
+        int n3=v3.size();
+        int x=0,y=0,z=0;
         vector<int> ans;
-        for(auto x:v3)
+        while(x<n1 && y<n2 && z<n3)
         {
-            if(m1[x] && m2[x])
+            if(v1[x]==v2[y] && v2[y]==v3[z])
             {
-                ans.push_back(x);
+                ans.push_back(v1[x]);
             }
+            int mn=min({v1[x],v2[y],v3[z]});
+            if(v1[x]==mn)
+            {
+                x++;
+            }
+            if(v2[y]==mn)
+            {
+                y++;
+            }
+            if(v3[z]==mn)
+            {
+                z++;
+            }   
         }
         return ans;
     }
