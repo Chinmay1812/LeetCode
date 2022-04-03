@@ -2,10 +2,16 @@ class Solution {
 public:
     vector<int> arraysIntersection(vector<int>&v1, vector<int>&v2, vector<int>&v3) 
     {
-        vector<int> ans;
-        for(auto x:v1)
+        unordered_map<int,int> m1,m2;
+        for(int i=0;i<v2.size();i++)
         {
-            if(binary_search(v2.begin(),v2.end(),x)&&binary_search(v3.begin(),v3.end(),x))
+            m1[v1[i]]++;
+            m2[v2[i]]++;
+        }
+        vector<int> ans;
+        for(auto x:v3)
+        {
+            if(m1[x] && m2[x])
             {
                 ans.push_back(x);
             }
