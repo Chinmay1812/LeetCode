@@ -1,70 +1,29 @@
-class Solution 
-{
+class Solution {
 public:
-    
-    class two
-    {
-        public:
-        int start,end;
-    };
-    
-    class cmp
-    {
-        public:
-        bool operator()(two a,two b)
-        {
-            return a.start>b.start;
-        }   
-    };
-    
     vector<int> minAvailableDuration(vector<vector<int>>&v1, vector<vector<int>>&v2, int k) 
     {
-        priority_queue<two,vector<two>,cmp> q;
-        
-        for(auto x:v1)
+        int n1=v1.size();
+        int n2=v2.size();
+        int x=0,y=0;
+        sort(v2.begin(),v2.end());
+        sort(v1.begin(),v1.end());
+        while(x<n1 and y<n2)
         {
-            if(x[1]-x[0]>=k)
+            int start=max(v1[x][0],v2[y][0]);
+            int end=min(v1[x][1],v2[y][1]);   
+            if(end-start>=k)
             {
-                two var;
-                var.start=x[0];
-                var.end=x[1];
-                q.push(var);
+                return {start,start+k};
+            }
+            if(v1[x][1]<v2[y][1])
+            {
+                x++;
+            }
+            else
+            {
+                y++;
             }
         }
-        
-        for(auto x:v2)
-        {
-            if(x[1]-x[0]>=k)
-            {
-                two var;
-                var.start=x[0];
-                var.end=x[1];
-                q.push(var);
-            }
-        }
-        
-        vector<int> ans;
-        two first;
-        if(!q.empty())
-        {
-         first=q.top();
-        q.pop();
-        }
-        while(!q.empty())
-        {
-          
-          two second=q.top();
-          q.pop();
-          int x=second.start+k;
-            if(x<=first.end)
-            {
-                ans.push_back(second.start);
-                ans.push_back(second.start+k);
-                break;
-            }
-            first=second;
-            
-        }
-        return  ans;
+        return {};
     }
 };
