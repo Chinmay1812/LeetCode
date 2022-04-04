@@ -2,11 +2,7 @@ class Solution {
 public:
     bool isMajorityElement(vector<int>&v, int k) 
     {
-        auto x=binary_search(v.begin(),v.end(),k);
-        if(!x)
-        {
-            return false;
-        }
+       
         auto it=lower_bound(v.begin(),v.end(),k);
         auto jt=upper_bound(v.begin(),v.end(),k);
         
