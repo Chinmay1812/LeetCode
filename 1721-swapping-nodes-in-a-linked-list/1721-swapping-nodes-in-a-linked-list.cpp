@@ -25,17 +25,17 @@ public:
         auto node2=head;
         int k2=len-k+1;
         
-        while(c!=k)
+        int d=1;
+        while(d!=len)
         {
+            d++;
             c++;
-            node1=node1->next;
+           if(c<=k) node1=node1->next;
+            if(d<=k2) node2=node2->next;
+            
         }
-        c=1;
-        while(c!=k2)
-        {
-            c++;
-            node2=node2->next;
-        }
+
+       
         swap(node1->val,node2->val);
         return head;
     }
