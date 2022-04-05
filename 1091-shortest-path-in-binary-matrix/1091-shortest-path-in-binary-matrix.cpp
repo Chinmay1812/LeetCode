@@ -1,5 +1,24 @@
 class Solution {
 public:
+    
+    class two
+    {
+        public:
+        int x,y,dist;
+    };
+    class cmp
+    {
+        public:
+        bool operator()(two a,two b)
+        {
+            return a.dist>b.dist;
+        }
+        
+    };
+    
+    
+    
+    
     int shortestPathBinaryMatrix(vector<vector<int>>&v) 
     {
         int n=v.size();
@@ -12,34 +31,48 @@ public:
         {
             return -1;
         }
-        v[0][0]=1;
-        while(!q.empty())
+        priority_queue<two,vector<two>,cmp> pq;
+        two z;
+        z.x=n-1;
+        z.y=m-1;
+        z.dist=1;
+        pq.push(z);
+        int dist=0;
+        v[n-1][m-1]=1;
+        while(!pq.empty())
         {
-            auto var=q.front();
-            q.pop();
-            int x=var.first;
-            int y=var.second;
-            int dist=v[x][y];
-            if(x==n-1 && y==m-1)
+            two var=pq.top();
+            pq.pop();
+        
+            auto a=var.x;
+            auto b=var.y;
+            if(a==0&&b==0)
             {
-                return dist;
+                return var.dist;
             }
+            
             for(int i=0;i<8;i++)
             {
-                int p=x+dir[i][0];
-                int r=y+dir[i][1];
-
-                if(p>=n||p<0||r>=m||r<0)
+                auto p=a+dir[i][0];
+                auto q=b+dir[i][1];
+                if(p>=n||p<0||q>=m||q<0)
                 {
                     continue;
                 }
-                if(v[p][r]==0)
+                if(v[p][q]==0)
                 {
-                    v[p][r]=dist+1;
-                    q.push({p,r});
+                    two temp;
+                    temp.x=p;
+                    temp.y=q;
+                    temp.dist=1+var.dist;
+                    v[p][q]=1;
+                    pq.push(temp);
                 }
+                
             }
+            
         }
-        return -1;
+        
+      return -1;
     }
 };
