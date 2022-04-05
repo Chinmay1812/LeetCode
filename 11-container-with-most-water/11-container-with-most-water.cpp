@@ -7,13 +7,14 @@ public:
         while(i<j)
         {
             ans=max(ans,(j-i)*min(v[i],v[j]));
-            if(v[i]<v[j])
-            {      
-                    i++;
+            int h=min(v[i],v[j]);
+            while(i<j && v[i]<=h)
+            {
+                i++;
             }
-            else
-            { 
-                    j--;
+            while(i<j && v[j]<=h)
+            {
+                j--;
             }
             
         }
