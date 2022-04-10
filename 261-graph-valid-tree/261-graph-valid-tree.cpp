@@ -1,44 +1,63 @@
-class Solution {
-public:
-    
-    void dfs(int x,int *vis,vector<int> *v)
+class Solution
+{
+    public:
+    int rank[2001] = { 0 };
+    int parent[2001] = { 0 };
+    int c;
+    void make(int v)
     {
-        vis[x]=1;
-        for(auto z:v[x])
+        c = v;
+        for (int i = 0; i < v; i++)
         {
-            if(!vis[z])
-            {
-                dfs(z,vis,v);
-            }
+            parent[i] = i;
         }
     }
-    
-    
-    bool validTree(int n, vector<vector<int>>&v1) 
+
+    int findparent(int n)
     {
-        int edges=v1.size();
-        if(edges!=n-1)
+        if (parent[n] == n)
         {
-            return false;
+            return n;
         }
-        vector<int> v[n+1];
-        for(auto x:v1)
+        return parent[n] = findparent(parent[n]);
+    }
+
+    void unions(int a, int b)
+    {
+        a = findparent(a);
+        b = findparent(b);
+        if (a != b)
         {
-            v[x[0]].push_back(x[1]);
-            v[x[1]].push_back(x[0]);
-        }
-        int c=0;
-        int vis[n];
-        memset(vis,0,sizeof(vis));
-        for(int i=0;i<n;i++)
-        {
-            if(!vis[i])
+            if (rank[a] < rank[b])
             {
-                dfs(i,vis,v);
-                c++;
+                parent[a] = parent[b];
             }
+            else if (rank[a] > rank[b])
+            {
+                parent[b] = parent[a];
+            }
+            else
+            {
+                parent[b] = parent[a];
+                rank[a]++;
+            }
+            c--;
         }
-        
-        return c==1 ;
+    }
+
+    bool validTree(int n, vector<vector < int>> &v)
+    {
+        make(n);
+        int edge = v.size();
+        if (edge != n - 1)
+        {
+            return 0;
+        }
+        for (auto x: v)
+        {
+            unions(x[0], x[1]);
+        }
+
+        return c == 1;
     }
 };
