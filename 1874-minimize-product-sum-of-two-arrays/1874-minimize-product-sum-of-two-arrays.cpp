@@ -23,11 +23,11 @@ public:
             }
             else if(a[x]==0)
             {
-                x++;
+              while(x<=100 && a[x]==0)  x++;
             }
             else if(b[y]==0)
             {
-                y--;
+              while(y>=0 && b[y]==0)  y--;
             }  
         }
         return ans;
