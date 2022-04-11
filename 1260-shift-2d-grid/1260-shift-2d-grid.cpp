@@ -1,37 +1,24 @@
-class Solution {
-public:
-    vector<vector<int>> shiftGrid(vector<vector<int>>&v, int k) 
-    {
-        int mod=v.size()*v[0].size();
-        int n=v.size();
-        int m=v[0].size();
-        k%=mod;
-        
-        while(k--)
+class Solution
+{
+    public:
+        vector<vector < int>> shiftGrid(vector<vector < int>> &v, int k)
         {
-            int last=v[n-1][m-1];
-            
-            for(int i=n-1;i>=0;i--)
+            int mod = v.size()*v[0].size();
+            int n = v.size();
+            int m = v[0].size();
+            k %= mod;
+            vector<vector < int>> ans(n, vector<int> (m));
+
+            for (int i = 0; i < n; i++)
             {
-                for(int j=m-1;j>=0;j--)
+                for (int j = 0; j < m; j++)
                 {
-                    if(i==0 && j==0)
-                    {
-                        continue;
-                    }
-                    else if(j==0)
-                    {
-                        v[i][j]=v[i-1][m-1];
-                    }
-                    else
-                    {
-                        v[i][j]=v[i][j-1];
-                    }
-                   
+                    int newCol = (j + k) % m;
+                    int x=(j+k)/m;
+                    int newRow = (i +x) % n;
+                    ans[newRow][newCol] = v[i][j];
                 }
             }
-            v[0][0]=last;
+            return ans;
         }
-        return v;
-    }
 };
