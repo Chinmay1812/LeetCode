@@ -8,7 +8,17 @@ public:
         for(int i=0;i<n;i++)
         {
             string s=v[i];
-            sort(s.begin(),s.end());
+            int h[26]={0};
+            for(int i=0;i<s.size();i++)
+            {
+                h[s[i]-'a']++;
+            }  
+            s.clear();
+            for(int i=0;i<26;i++)
+            {
+                s+=string(h[i],i+'a');
+            }
+            
             m[s].push_back(v[i]);
         }
         vector<vector<string>> ans;
