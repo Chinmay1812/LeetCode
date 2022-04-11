@@ -1,57 +1,25 @@
-class Solution {
-public:
-    bool fun(string &s,int k)
-    {
-        int n=s.size();
-        auto ch=s[n-1];
-        int c=0; 
-        for(int i=n-1;i>=n-k;i--)
+class Solution
+{
+    public:
+        string removeDuplicates(string s, int k)
         {
-            c+=ch==s[i];
-            if(ch!=s[i])
+            vector<int> count(s.size());
+            for (int i = 0; i < s.size(); ++i)
             {
-                return false;
-            }
-        } 
-        return c==k;
-    }
-    
-    
-    string removeDuplicates(string s, int k) 
-    {
-        string ans="";
-        int n=s.size();
-         if(n==1)
-         {
-             return s;
-         }
-         
-        if(n==2)
-        {
-            if(s[0]!=s[1])
-            {
-                return s;
-            }
-            else
-            {
-                return " ";
-            }
-        }
-        
-        for(int i=0;i<n;i++)
-        {   
-            ans.push_back(s[i]);
-            if(ans.size()>=k && fun(ans,k))
-            {
-                int x=k;
-             
-                while(x--)
+                if (i == 0 || s[i] != s[i - 1])
                 {
-                    ans.pop_back();
+                    count[i] = 1;
+                }
+                else
+                {
+                    count[i] = count[i - 1] + 1;
+                    if (count[i] == k)
+                    {
+                        s.erase(i - k + 1, k);
+                        i = i - k;
+                    }
                 }
             }
+            return s;
         }
-        
-        return ans;
-    }
 };
