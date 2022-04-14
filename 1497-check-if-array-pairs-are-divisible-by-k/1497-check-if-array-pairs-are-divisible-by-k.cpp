@@ -4,7 +4,7 @@ public:
     {
         int n=v.size();
         unordered_map<int,int> m;
-        for(auto x:v)
+        for(auto &x:v)
         { 
             m[(x%k +k)%k]++;
         }
