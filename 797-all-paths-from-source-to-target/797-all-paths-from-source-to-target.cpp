@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> ans;
     
-    void dfs(vector<vector<int>>&v,vector<int>&temp,int z,bool *vis)
+    void dfs(vector<vector<int>>&v,vector<int>&temp,int z)
     {
     
         int n=v.size();
@@ -15,7 +15,7 @@ public:
         for(auto x:v[z])
         {
               temp.push_back(x);  
-              dfs(v,temp,x,vis);
+              dfs(v,temp,x);
               temp.pop_back();
         }
         
@@ -24,9 +24,8 @@ public:
     vector<vector<int>> allPathsSourceTarget(vector<vector<int>>&v) 
     {
         vector<int> temp;
-        bool vis[v.size()];
         temp.push_back(0);  
-        dfs(v,temp,0,vis);
+        dfs(v,temp,0);
         return ans;
     }
 };
