@@ -9,21 +9,21 @@ public:
         vector<int> ans;
         while(i<n1 && j<n2)
         {
-            if(v1[i]>v2[j])
+            if(i<n1 && j<n2 &&v1[i]>v2[j])
             {
                 while(j<n2 && v1[i]>v2[j])
                 {
                     j++;
                 }
             }
-            else if(v1[i]<v2[j])
+             if(i<n1 && j<n2 &&v1[i]<v2[j])
             {
                 while(i<n1 && v1[i]<v2[j])
                 {
                     i++;
                 }
             }
-            else
+            if( i<n1 && j<n2 && v1[i]==v2[j])
             {
                 ans.push_back(v1[i]);
                 i++;
