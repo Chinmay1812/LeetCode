@@ -1,29 +1,24 @@
 class Solution {
 public:
-    
-    int fun(vector<vector<int>>&v,int row,int i,int dp[][201])
-    {
-        int sum=INT_MAX;
-        if(row>=v.size() || i>=v[row].size())
-        {
-            return 0;
-        }    
-        if(dp[row][i]!=-1)
-        {
-            return dp[row][i];
-        }
-        int n=v[row].size();
-        sum=v[row][i]+min(fun(v,row+1,i,dp),fun(v,row+1,i+1,dp));;
-        return dp[row][i]=sum;
-        
-    }
-    
     int minimumTotal(vector<vector<int>>&v) 
     {
         int n=v.size();
-        
-        int dp[n][201];
+        int m=v[n-1].size();
+        int dp[n][m];
         memset(dp,-1,sizeof(dp));
-        return fun(v,0,0,dp); 
+        for(int i=0;i<m;i++)
+        {
+            dp[n-1][i]=v[n-1][i];
+        }
+        int x=m;
+        for(int i=n-2;i>=0;i--)
+        {
+            x--;
+            for(int j=0;j<x;j++)
+            {
+                dp[i][j]=min(dp[i+1][j],dp[i+1][j+1])+v[i][j];
+            }
+        }
+        return dp[0][0];
     }
 };
