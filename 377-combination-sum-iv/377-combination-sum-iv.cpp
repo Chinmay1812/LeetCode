@@ -5,7 +5,7 @@ public:
         int n=v.size();
        unsigned int dp[k+1];
         memset(dp,0,sizeof(dp));
-        sort(v.begin(),v.end());
+    
         dp[0]=1;
         for(int i=1;i<=k;i++)
         {
@@ -14,10 +14,6 @@ public:
                 if(i>=x)
                 {
                     dp[i]+=dp[i-x];
-                }
-                else
-                {
-                    break;
                 }
             }
         }
