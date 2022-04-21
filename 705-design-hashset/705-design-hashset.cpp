@@ -11,11 +11,8 @@ public:
     }
     
     void remove(int x) 
-    {
-        if(m[x]>0)
-        {
+    { 
            m[x]=0; 
-        }
     }
     
     bool contains(int x) 
