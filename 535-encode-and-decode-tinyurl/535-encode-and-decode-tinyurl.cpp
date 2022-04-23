@@ -2,15 +2,17 @@ class Solution {
 public:
 
     // Encodes a URL to a shortened URL.
+    string g="";
     string encode(string s)
     {
-        return s;
+        g= s;
+        return " ";
     }
 
     // Decodes a shortened URL to its original URL.
     string decode(string s) 
     {
-        return s;    
+        return g;    
     }
 };
 
