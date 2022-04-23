@@ -1,28 +1,60 @@
 class MyHashMap {
 public:
-     int a[1000001];
-    MyHashMap()
+    int mod;
+    vector<pair<int,int>> v[2069];
+    MyHashMap() 
     {
-          memset(a,-1,sizeof(a));
+         mod=2069;
     }
-   
+    
     void put(int x, int y) 
     {
-        a[x]=y;
-    }
-    
-    int get(int x) 
-    {
-        if(a[x]==-1)
+        int ind=x%mod;
+
+        vector<pair<int,int> >::iterator it;
+        for( it=v[ind].begin();it!=v[ind].end();it++)
         {
-            return -1;
+            if(it->first==x)
+            {
+                it->second=y;
+                return;
+            }
         }
-        return a[x];
+        if(it==v[ind].end())
+        {
+            v[ind].push_back({x,y});
+        }
     }
     
-    void remove(int x) 
+    int get(int x)
     {
-        a[x]=-1;
+        int ind=x%mod;
+        vector<pair<int,int> >::iterator it;
+        for( it=v[ind].begin();it!=v[ind].end();it++)
+        {
+            if(it->first==x && it->second!=-1)
+            {
+                return it->second;
+            }
+        }
+       return -1;
+    }
+    
+    void remove(int x)
+    {
+        int ind=x%mod;
+        vector<pair<int,int> >::iterator it;
+        for( it=v[ind].begin();it!=v[ind].end();it++)
+        {
+            if(it->first==x)
+            {
+                it->second=-1;
+            }
+        }
+        // if(it==v[ind].end())
+        // {
+        //     return -1;
+        // }
     }
 };
 
