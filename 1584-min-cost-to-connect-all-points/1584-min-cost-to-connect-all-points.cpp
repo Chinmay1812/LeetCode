@@ -97,10 +97,10 @@ public:
                 ans+=dist;
                 Union(i,j);
             }
-            if(comp==1)
-            {
-                break;
-            }
+            // if(comp==1)
+            // {
+            //     break;
+            // }
             
         }
         return ans;
