@@ -24,7 +24,7 @@ public:
     
     int comp;
     
-    void Union(int a,int b)
+    bool Union(int a,int b)
     {
         int x=a;
         int y=b;
@@ -32,7 +32,7 @@ public:
         b=find_parent(b);
         if(a==b)
         {
-            return ;
+            return 0;
         }
         if(rank[a]>rank[b])
         {
@@ -48,7 +48,7 @@ public:
             rank[b]++;
         }
         comp--;
-   
+        return 1;
     }
     
     class three
@@ -92,15 +92,14 @@ public:
            int i=var.x;
            int j=var.y;
            int dist=var.dist;
-            if(find_parent(i)!=find_parent(j))
+            if(Union(i,j))
             {
                 ans+=dist;
-                Union(i,j);
             }
-            // if(comp==1)
-            // {
-            //     break;
-            // }
+            if(comp==1)
+            {
+                break;
+            }
             
         }
         return ans;
