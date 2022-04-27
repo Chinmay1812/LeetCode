@@ -1,42 +1,49 @@
 class Solution {
 public:
-    int maxLength(vector<string>&v) 
+    int m[26]={0};
+    int ans;
+    void fun(vector<string>&v,int j)
     {
-        int ans=0;
         int n=v.size();
-        int N=pow(2,n);
-        for(int i=0;i<N;i++)
+        int res=0;
+
+        for(int i=0;i<26;i++)
         {
-            int x=i;
-            int c=0;
-            int m[26]={0};
-            string g="";
-            while(x)
+            if(m[i]>1)
             {
-                if((x&1))
-                {
-                  
-                    for(int i=0;i<v[c].size();i++)
-                    {
-                        if(m[v[c][i]-'a']==0)
-                        {
-                            g+=v[c][i];
-                        }   
-                        else
-                        {
-                            g="";
-                            break;
-                        }
-                        m[v[c][i]-'a']++;
-                    }
-                }
-                c++;
-                x>>=1;
+                return;
             }
-            int z=g.size();
-            ans=max(z,ans);
+            else if(m[i]==1)
+            {
+                res++;
+            }
+        }
+        ans=max(ans,res);
+        for(int i=j;i<n;i++)
+        {
+            for(auto x:v[i])
+            {
+                m[x-'a']++;
+            }
+            fun(v,i+1);
+            for(auto x:v[i])
+            {
+                m[x-'a']--;
+            }
         }
         
+        
+        
+    }
+    
+    
+    
+    
+    
+    int maxLength(vector<string>&v) 
+    {
+        ans=0;
+        fun(v,0);
         return ans;
     }
 };
