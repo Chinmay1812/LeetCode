@@ -4,7 +4,7 @@ public:
     {
         int lo=0,hi=a.size()-1;
         
-        while(lo<hi)
+        while(lo<=hi)
         {
             if(a[lo]%2>a[hi]%2)
             {
