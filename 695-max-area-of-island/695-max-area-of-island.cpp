@@ -1,11 +1,11 @@
 class Solution {
 public:
-    int vis[50][50];
+  
     vector<vector<int>> dir{{-1,0},{1,0},{0,1},{0,-1}};
     int c;
     void dfs(vector<vector<int>>&v,int x,int y)
     {
-        vis[x][y]=1;
+        v[x][y]=0;
         int n=v.size();
         int m=v[0].size();
         c++;
@@ -17,13 +17,13 @@ public:
             {
                 continue;
             }
-            if(!vis[dx][dy] && v[dx][dy]==1)
+            if(v[dx][dy]==1)
             {
                 dfs(v,dx,dy);
             }
-            else if(!vis[dx][dy] && v[dx][dy]!=1)
+            else if(v[dx][dy]!=1)
             {
-                vis[dx][dy]=1;
+                v[dx][dy]=0;
             }
         }
         
@@ -34,12 +34,12 @@ public:
         int n=v.size();
         int m=v[0].size();
         int ans=0;
-        memset(vis,0,sizeof(vis));
+     
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<m;j++)
             {
-                if(v[i][j]==1 && !vis[i][j])
+                if(v[i][j]==1)
                 {
                     c=0;
                     dfs(v,i,j);
