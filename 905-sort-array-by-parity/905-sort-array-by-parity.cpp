@@ -1,13 +1,26 @@
 class Solution {
 public:
-    static bool cp(int a,int b)
+    vector<int> sortArrayByParity(vector<int>&a) 
     {
-      return a%2<b%2;
-    }
-    
-    vector<int> sortArrayByParity(vector<int>&v) 
-    {
-        sort(v.begin(),v.end(),cp);
-        return v;
+        int lo=0,hi=a.size()-1;
+        
+        while(lo<hi)
+        {
+            if(a[lo]%2>a[hi]%2)
+            {
+                swap(a[lo++],a[hi--]);
+            }
+            
+            if(a[hi]%2==1)
+            {
+                hi--;
+            }
+            if(a[lo]%2==0)
+            {
+                lo++;
+            }
+        }
+        
+        return a;
     }
 };
