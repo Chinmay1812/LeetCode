@@ -31,6 +31,10 @@ public:
                 {
                     q.push({dx,dy});
                 }
+                else if(!vis[dx][dy] && v[dx][dy]!=val)
+                {
+                    vis[dx][dy]=1;
+                }
             }
         }
 
