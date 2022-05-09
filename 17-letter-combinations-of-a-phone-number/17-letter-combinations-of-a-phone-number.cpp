@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<string> ans;
     string get(int n)
-{
+ {
     if(n==2)
     {
         return "abc";
@@ -45,15 +45,14 @@ public:
             ans.push_back(s);
             return;
         }
+        
         int small=n%10;
         int rem=n/10;
-        string var=get(small);
-        
-        for(int i=0;i<var.size();i++)
+        string temp=get(small);
+        for(int i=0;i<temp.size();i++)
         {
-            fun(rem,var[i]+s);    
+            fun(rem,temp[i]+s);
         }
-
     }
     
     vector<string> letterCombinations(string s) 
@@ -63,9 +62,7 @@ public:
         {
             n=n*10+s[i]-'0';
         }
-        
-       if(n!=0) {fun(n);
-        sort(ans.begin(),ans.end());}
+     if(n)   fun(n);
        return ans;      
     };
         
