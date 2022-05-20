@@ -2,17 +2,19 @@ class Solution {
 public:
     vector<int> findDuplicates(vector<int>&v) 
     {
+        int n=v.size();
         vector<int> ans;
-        // ans.reserve(v.size());
-        unordered_map<int,int> m;
         for(auto &x:v)
         {
-            m[x]++;
-            if(m[x]==2)
+            if(v[abs(x)-1]<0)
             {
-                ans.push_back(x);
+                ans.push_back(abs(x));
+            }
+            else
+            {
+                v[abs(x)-1]*=-1;
             }
         }
-       return ans;
+        return ans;
     }
 };
