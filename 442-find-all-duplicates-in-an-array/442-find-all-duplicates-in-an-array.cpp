@@ -3,7 +3,7 @@ public:
     vector<int> findDuplicates(vector<int>&v) 
     {
         vector<int> ans;
-        ans.reserve(v.size());
+        // ans.reserve(v.size());
         unordered_map<int,int> m;
         for(auto &x:v)
         {
