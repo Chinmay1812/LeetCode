@@ -64,7 +64,7 @@ public:
     
     vector<vector<int> > combinationSum(vector<int> &v, int k) 
     {
-        sort(v.begin(),v.end());
+        // sort(v.begin(),v.end());
         fun(v,k);
         return ans;
         
