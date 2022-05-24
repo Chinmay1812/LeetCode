@@ -5,45 +5,46 @@ public:
         
         int n=s.size();
         int ans=0;
-        int x=0,y=0;
+        int left=0,right=0;
         for(int i=0;i<n;i++)
         {
            if(s[i]==')')
            {
-               y++;
+               right++;
            }
            else if(s[i]=='(')
             {
-                x++;
+                left++;
             }
-            if(x==y)
+            if(left==right)
             {
-                ans=max(x+y,ans);
+                ans=max(left+right,ans);
             }
-            else if(y>x)
+            else if(right>left)
             {
-                x=y=0;
+                left=right=0;
             }
         }
-        x=0,y=0;
-
+        
+        left=right=0;
+        
         for(int i=n-1;i>=0;i--)
         {
            if(s[i]=='(')
            {
-               x++;
+               left++;
            }
             else if(s[i]==')')
             {
-                y++;
+                right++;
             }
-            if(x==y)
+            if(left==right)
             {
-                ans=max(x+y,ans);
+                ans=max(left+right,ans);
             }
-            else if(x>y)
+            else if(left>right)
             {
-                x=y=0;
+                left=right=0;
             }
         }
         
