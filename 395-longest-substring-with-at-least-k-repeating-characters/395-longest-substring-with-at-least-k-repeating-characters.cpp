@@ -1,59 +1,31 @@
 class Solution {
 public:
-    int longestSubstring(string s, int k) 
+    int longestSubstring(string s, int k)
     {
         int n=s.size();
-        unordered_map<char,int> m,g;
-        if(s=="zzzzzzzzzzaaaaaaaaabbbbbbbbhbhbhbhbhbhbhicbcbcibcbccccccccccbbbbbbbbaaaaaaaaafffaahhhhhiaahiiiiiiiiifeeeeeeeeee")
+        if(n==0 || n<k)
         {
-            return 21;
+            return 0;
         }
-        
-        for(auto x:s)
+        vector<int> freq(26,0);
+        for(int i=0;i<n;i++)
         {
-            m[x]++;
+            freq[s[i]-'a']++;
         }
-        int c=0,ans=0;
-        for(auto x:s)
+        int var1,var2;
+        for(int i=0;i<n;i++)
         {
-            g[x]++;
-            if(m[x]>=k)
+            if(freq[s[i]-'a']<k)
             {
-                c++;
+                var1=longestSubstring(s.substr(0,i),k);
+                var2=longestSubstring(s.substr(i+1),k);
+                break;
             }
-            else
+            if(i==n-1)
             {
-                c=0;
-                g.clear();
-            }
-            int f=0;
-            for(auto it:g)
-            {
-                if(it.second<k)
-                {
-                    f=1;
-                    break;
-                }
-            }
-            if(f==0)
-            {
-                ans=max(ans,c);
-            }
+                return n;
+            }    
         }
-        c=1;
-        for(int i=1;i<n;i++)
-        {
-            if(s[i]==s[i-1])
-            {
-                c++;
-            }
-            else
-            {
-                c=1;
-            }
-         if(c>=k)   ans=max(c,ans);
-        }
-        
-        return ans;
+        return max(var1,var2);
     }
 };
