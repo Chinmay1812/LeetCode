@@ -3,13 +3,11 @@ public:
     int missingNumber(vector<int>&v) 
     {
         int n=v.size();
-        int sum=n*(n+1)/2;
-        int val=0;
-        for(auto &x:v)
+        int ans=n;
+        for(int i=0;i<n;i++)
         {
-            val+=x;
+            ans^=v[i]^i;
         }
-        int ans=sum-val;    
         return ans;
     }
 };
