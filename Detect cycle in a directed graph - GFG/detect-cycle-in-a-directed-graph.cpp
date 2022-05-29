@@ -6,50 +6,44 @@ using namespace std;
 class Solution {
   public:
     // Function to detect cycle in a directed graph.
-    bool cycle(int u,bool *vis,bool *f,vector<int>adj[])
+    bool dfs(vector<int> *v,int *curr,int *vis,int node)
     {
-        vis[u]=1;
-        f[u]=1;
-        for(auto x:adj[u])
+        vis[node]=1;
+        curr[node]=1;
+        
+        for(auto x:v[node])
         {
             if(!vis[x])
             {
-               if(cycle(x,vis,f,adj))
-               {
-                   return 1;
-               }
-              
+                if(dfs(v,curr,vis,x))
+                {
+                    return 1;
+                }
             }
-            else if(f[x]==1 && vis[x]==1)
+            else if(curr[x]==1)
             {
                 return 1;
             }
-            // else if(vis[x]==1 && f[x]==0)
-            // {
-            //     return 0;
-            // }
-          
         }
-       f[u]=0;
-       return 0;
+        curr[node]=0;
+        return 0;
     }
     
-    bool isCyclic(int n, vector<int> adj[]) 
+    bool isCyclic(int n, vector<int> v[]) 
     {
-        int e=adj->size();
-        bool vis[n]={0};
-        bool f[n]={0};
+        int vis[n];
+        int curr[n];
+        memset(vis,0,sizeof(vis));
+        memset(curr,0,sizeof(curr));
+        
         for(int i=0;i<n;i++)
         {
-            if(!vis[i])
+            if(!vis[i] && dfs(v,curr,vis,i))
             {
-                if(cycle(i,vis,f,adj))
-                {
-                    return true;
-                }
+                return 1;
             }
         }
-        return false;
+    return 0;
     }
 };
 
