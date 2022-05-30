@@ -4,23 +4,20 @@ public:
     {
         int n=v.size();
         if(n==0) return 0;
-        int c=1,ans=1;
-        sort(v.begin(),v.end());
-        for(int i=1;i<n;i++)
+        unordered_set<int> s(v.begin(),v.end());
+        int ans=0;
+        for(auto &x:s)
         {
-            if(v[i]==v[i-1]+1)
+            if(s.find(x)==s.end())
             {
-                c++;
+                continue;
             }
-            else if(v[i]==v[i-1])
-            {
-                
-            }
-            else
-            {
-                c=1;
-            }
-            ans=max(ans,c);
+            
+            int prev=x-1;
+            int next=x+1;
+            while(s.find(prev)!=s.end()) s.erase(prev--);
+            while(s.find(next)!=s.end()) s.erase(next++);
+            ans=max(ans,next-prev-1);
         }
         return ans;
     }
