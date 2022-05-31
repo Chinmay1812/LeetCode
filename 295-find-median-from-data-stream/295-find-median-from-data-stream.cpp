@@ -21,12 +21,12 @@ public:
         {
             if(x>=*hi)
             {
-                hi++;
+                ++hi;
             }
             else
             {
                 lo--;
-            }
+            }   
         }
         else
         {
@@ -36,10 +36,10 @@ public:
             }
             else
             {
-                --hi;
-                lo=hi;
+              lo=--hi;  
             }
         }
+      
     }
     
     double findMedian() 
