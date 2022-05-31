@@ -24,7 +24,11 @@ public:
                 y++;
             }
             
-            if(x&&y) ans=max(ans,x+y+1);
+            if(x&&y) 
+            {
+                ans=max(ans,x+y+1);
+                j=i-1;
+            }
             
             while(i<n-1 && v[i]==v[i+1]) ++i;
             
