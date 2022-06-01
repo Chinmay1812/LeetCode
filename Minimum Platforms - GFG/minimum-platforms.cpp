@@ -12,27 +12,21 @@ class Solution{
     //railway station such that no train waits.
     int findPlatform(int a[], int b[], int n)
     {
-        vector<pair<int,int> > v;
-        for(int i=0;i<n;i++)
+        sort(a,a+n);
+        sort(b,b+n);
+        int c=0;
+        for(int i=0,j=0;i<n;i++)
         {
-            v.push_back({a[i],b[i]});
-        }
-        int c=1;
-        sort(v.begin(),v.end());
-        multiset<int> m;
-        for(int i=0;i<n;i++)
-        {
-            if(!m.empty() && *m.begin()>=v[i].first)
+            if(a[i]<=b[j])
             {
                 c++;
             }
-            else if(!m.empty())
+            else
             {
-                m.erase(m.begin());
+                j++;
             }
-            m.insert(v[i].second);
         }
-       return c;
+        return c;
     }
 };
 
