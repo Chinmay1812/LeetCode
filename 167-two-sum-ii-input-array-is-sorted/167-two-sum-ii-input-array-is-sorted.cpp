@@ -3,26 +3,18 @@ public:
     vector<int> twoSum(vector<int>&v, int k)
     {
         int n=v.size();
-        int lo=0,hi=n-1;
         vector<int> ans;
-        while(lo<hi)
+        for(int i=0;i<n;i++)
         {
-            int sum=v[lo]+v[hi];
-            if(sum==k)
+            int sum=k-v[i];
+            auto f=binary_search(v.begin(),v.end(),sum);
+            if(f)
             {
-                ans.push_back(lo+1);
-                ans.push_back(hi+1);
+                auto lb=lower_bound(v.begin()+i+1,v.end(),sum)-v.begin();
+                ans.push_back(i+1);
+                ans.push_back(lb+1);
                 break;
             }
-            else if(sum>k)
-            {
-                hi--;
-            }
-            else
-            {
-                lo++;
-            }
- 
         }
         return ans;
     }
