@@ -1,47 +1,29 @@
 class Solution {
 public:
-    vector<int> twoSum(vector<int>&v, int k) 
+    vector<int> twoSum(vector<int>&v, int k)
     {
         int n=v.size();
+        int lo=0,hi=n-1;
         vector<int> ans;
-        int left=0,right=n-1;
-        while(left<right)
+        while(lo<hi)
         {
-            int mid=left+(right-left)/2;
-            int sum=v[left]+v[right];
-            
+            int sum=v[lo]+v[hi];
             if(sum==k)
             {
-                ans.push_back(left+1);
-                ans.push_back(right+1);
+                ans.push_back(lo+1);
+                ans.push_back(hi+1);
                 break;
-            }
-            else if(sum<k)
-            {
-                if(v[mid]+v[right]<k)
-                {
-                    left=mid;
-                }
-                else
-                {
-                    left++;
-                }
             }
             else if(sum>k)
             {
-                if(v[left]+v[mid]>k)
-                {
-                    right=mid;
-                }
-                else
-                {
-                    right=right-1;
-                }
-                
+                hi--;
             }
-        
-            
+            else
+            {
+                lo++;
+            }
+ 
         }
-      return ans;
+        return ans;
     }
 };
