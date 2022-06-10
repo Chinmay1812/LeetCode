@@ -1,61 +1,26 @@
-class Solution {
-public:
-    bool fun(string &s,int k)
-    {
-        
-      unordered_map<char,int> m;   
-      int n=s.size();
-        if(k>n)
+class Solution
+{
+    public:
+        int lengthOfLongestSubstring(string s)
         {
-            return 0;
-        }
-        
-        for(int i=0;i<k;i++)
-        {
-            m[s[i]]++;
-        }
-        if(m.size()==k)
-        {
-            return 1;
-        }
-        for(int i=k;i<n;i++)
-        {
-            m[s[i-k]]--;
-            if(m[s[i-k]]==0)
+            int n = s.size();
+            unordered_map<char, int> m;
+            int i = 0, j = 0;
+            int ans = 0;
+
+            while (i < n && j < n)
             {
-                m.erase(m.find(s[i-k]));
+
+                if (m[s[j]] == 0)
+                {
+                    m[s[j++]]++;
+                    ans = max(ans, j - i);
+                }
+                else
+                {
+                    m[s[i++]]--;
+                }
             }
-            m[s[i]]++;
-            if(m.size()==k)
-        {
-            return 1;
+            return ans;
         }
-            
-        }
-    
-       return 0;
-    }
-    
-    int lengthOfLongestSubstring(string s)
-    {
-        int lo=1,hi=5*10000;
-        int ans=1;
-        if(s.empty()) return 0;
-        while(lo<=hi)
-        {
-            int mid=lo+(hi-lo)/2;
-           
-            if(fun(s,mid))
-            {
-                ans=max(ans,mid);
-                lo=mid+1;
-            }
-            else
-            {
-                hi=mid-1;
-            }
-         
-        }
-        return ans;
-    }
 };
