@@ -1,29 +1,32 @@
 class Solution {
 public:
-    int minOperations(vector<int>&nums, int x) 
+    int minOperations(vector<int>&v, int x) 
     {
-        int n = nums.size(), s = 0, ans = 1000000;
-        
-        for(int i = 0; i < n ; i++) s += nums[i];
-        
-        if(s < x) return -1;
-        
-        int st = 0, end = 0, windowSum = 0;
-        
-        while(end < n){            
-            windowSum += nums[end];            
-            while(windowSum > (s - x))
-            {
-                windowSum -= nums[st]; 
-                st++;
-            }            
-            if(windowSum == s - x){
-                ans = min(ans, n - (end - st + 1));
-            }            
-            end++;            
+        int n=v.size();
+        int tot=0;
+        for(int i=0;i<n;i++)
+        {
+            tot+=v[i];
         }
-		
-        return (ans == 1000000 ? -1 : ans);
-        
+        int k=tot-x;
+        int len=0;
+        unordered_map<int,int> m;
+        if(k==0) return n;
+        int sum=0;
+        m[0]=-1;
+        for(int i=0;i<n;i++)
+        {
+            sum+=v[i];
+            if(m.find(sum)==m.end())
+            {
+                m[sum]=i;
+            }
+            if(m.find(sum-k)!=m.end())
+            {
+                len=max(len,i-m[sum-k]);
+            }
+        }
+      
+        return len==0?-1:n-len;
     }
 };
