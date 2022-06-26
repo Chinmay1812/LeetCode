@@ -27,7 +27,7 @@ public:
                 x++;
             }
         }
-      if(!temp.empty())  ans.push_back(temp);
+          ans.push_back(temp);
         
         return ans;
     }
