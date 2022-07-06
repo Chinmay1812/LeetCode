@@ -1,58 +1,56 @@
 class Solution {
 public:
-    int cherryPickup(vector<vector<int>>&v) 
+    int dp[71][71][71];
+    int fun(vector<vector<int>>&v,int i,int j,int k)
     {
         int n=v.size();
         int m=v[0].size();
-        int dp[n][m][m];
-        memset(dp,0,sizeof(dp));
-        for(int j=0;j<m;j++)
+        if(i==n-1)
         {
-            for(int k=0;k<m;k++)
+            if(j==k)
             {
-                if(j==k)
+                return dp[i][j][j]=v[i][j];
+            }
+            else
+            {
+             return dp[i][j][k]=v[i][j]+v[i][k];
+            }
+        }
+        if(dp[i][j][k]!=-1)
+        {
+            return dp[i][j][k];
+        }
+        int val=0;
+        if(j!=k)
+        {
+            val=v[i][j]+v[i][k];
+        }
+        else
+        {
+            val=v[i][j];
+        }
+          int var=0;
+        for(int dj=-1;dj<=1;dj++)
+        {
+          
+            for(int dk=-1;dk<=1;dk++)
+            {
+                int dx=dj+j;
+                int dy=dk+k;
+                if(dx>=m||dx<0||dy>=m||dy<0)
                 {
-                    dp[n-1][j][j]=v[n-1][j];
+                    continue;
                 }
-                else
-                {
-                     dp[n-1][j][k]=v[n-1][j]+v[n-1][k];
-                }
+                var=max(var,fun(v,i+1,dx,dy));
             }
         }
         
-        for(int i=n-2;i>=0;i--)
-        {
-            for(int j=0;j<m;j++)
-            {
-                for(int k=0;k<m;k++)
-                {
-                    int val=0;
-                    val+=v[i][j];
-                    if(j!=k)
-                    {
-                        val+=v[i][k];
-                    }
-                    int var=0;
-                    for(int dj=-1;dj<=1;dj++)
-                    {
-                        for(int dk=-1;dk<=1;dk++)
-                        {
-                            int dx=j+dj;
-                            int dy=k+dk;
-                            if(dx<0||dx>=m||dy<0||dy>=m)
-                            {
-                                continue;
-                            }
-                            var=max({var,dp[i+1][dx][dy]});   
-                        }
-                    }
-                  dp[i][j][k]=val+var;
-                }
-            }
-            
-        }
-        
-        return dp[0][0][m-1];
+        return dp[i][j][k]=val+var;
+    }
+    int cherryPickup(vector<vector<int>>&v) 
+    {
+        memset(dp,-1,sizeof(dp));
+        int m=v[0].size();
+        return fun(v,0,0,m-1);
     }
 };
