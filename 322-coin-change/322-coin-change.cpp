@@ -1,27 +1,28 @@
 class Solution {
 public:
- 
-    int coinChange(vector<int>&v, int k)
+    int coinChange(vector<int>&v, int k) 
     {
+        int n=v.size();
         int dp[k+1];
-        sort(v.begin(),v.end());
+        for(int i=0;i<=k;i++) dp[i]=INT_MAX;
         dp[0]=0;
-        for(int i=1;i<=k;i++)
+        for(int i=0;i<n;i++) 
         {
-            dp[i]=INT_MAX;
-            for(auto &x:v)
+            if(v[i]<=k)
             {
-                if(i-x<0)
-                {
-                    break;
-                }
-                if(dp[i-x]!=INT_MAX)
-                {
-                    dp[i]=min(dp[i-x]+1,dp[i]);
-                }
+                dp[v[i]]=1;
             }
         }
-        int ans=dp[k]==INT_MAX?-1:dp[k];
-        return ans;
+        for(int i=1;i<=k;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+               if(i>v[j] && dp[i-v[j]]!=INT_MAX)
+               {
+                   dp[i]=min(1+dp[i-v[j]],dp[i]);
+               }
+            }
+        }
+        return dp[k]!=INT_MAX?dp[k]:-1;
     }
 };
