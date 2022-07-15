@@ -1,36 +1,27 @@
 class Solution {
 public:
-    int dp[1001][1001];
-    int fun(string &s1, string &s2,int i,int j)
+    int longestCommonSubsequence(string s, string g) 
     {
-        int n1=s1.size();
-        int n2=s2.size();
+        int n=s.size();
+        int m=g.size();
+        int dp[n+1][m+1];
+        memset(dp,0,sizeof(dp));
         
-        if(i==n1||j==n2)
+        for(int i=1;i<=n;i++)
         {
-            return 0;
-        }
-        if(dp[i][j]!=-1)
-        {
-            return dp[i][j];
+            for(int j=1;j<=m;j++)
+            {
+                if(s[i-1]==g[j-1])
+                {
+                    dp[i][j]=1+dp[i-1][j-1];
+                }
+                else
+                {
+                    dp[i][j]=max(dp[i][j-1],dp[i-1][j]);
+                }
+            }
         }
         
-       int a=0,b=0;
-       if(s1[i]==s2[j])
-       {
-           return 1+fun(s1,s2,i+1,j+1);
-       }
-       else
-       {
-           a=fun(s1,s2,i+1,j);
-           b=fun(s1,s2,i,j+1);
-       }
-      return dp[i][j]=max(a,b);
-    }
-    
-    int longestCommonSubsequence(string s1, string s2) 
-    {
-        memset(dp,-1,sizeof(dp));
-        return fun(s1,s2,0,0);
+        return dp[n][m];
     }
 };
