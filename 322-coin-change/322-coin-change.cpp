@@ -3,7 +3,7 @@ public:
     int coinChange(vector<int>&v, int k) 
     {
         int n=v.size();
-        int dp[k+1];
+        long dp[k+1];
         for(int i=0;i<=k;i++) dp[i]=INT_MAX;
         dp[0]=0;
         for(int i=0;i<n;i++) 
@@ -17,7 +17,7 @@ public:
         {
             for(int j=0;j<n;j++)
             {
-               if(i>v[j] && dp[i-v[j]]!=INT_MAX)
+               if(i>=v[j])
                {
                    dp[i]=min(1+dp[i-v[j]],dp[i]);
                }
