@@ -1,28 +1,31 @@
-class Solution {
-public:
-        int t[501][501];
-    int lcs(int n, int m, string &word1, string &word2){
-        if(n == 0 || m == 0)
-            return 0;
-        
-        if(t[n][m] != -1)
-            return t[n][m];
-        
-        if(word1[n-1] == word2[m-1]){
-            return t[n][m] = 1 + lcs(n-1, m-1, word1, word2);
-        }
-        
-        return t[n][m] = max(lcs(n-1, m, word1, word2), lcs(n, m-1, word1, word2));
-    }
+class Solution
+{
+    public:
+        int minDistance(string s, string g)
+        {
+            string temp = s;
+            reverse(temp.begin(), temp.end());
+            int n = s.size();
+            int m = g.size();
+            int dp[n + 1][m + 1];
+            memset(dp, 0, sizeof(dp));
 
-    int minDistance(string word1, string word2) {
-        memset(t, -1, sizeof(t));
-        
-        int n = word1.size(), m = word2.size();
-        
-        int l = lcs(n, m, word1, word2);
-        
-        int res = (n-l) + (m-l);
-        return res;
-    }
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j <= m; j++)
+                {
+                    if (s[i - 1] == g[j - 1])
+                    {
+                        dp[i][j] = 1 + dp[i - 1][j - 1];
+                    }
+                    else
+                    {
+                        dp[i][j] = max(dp[i][j - 1], dp[i - 1][j]);
+                    }
+                }
+            }
+            int ans = n - 2 *dp[n][m] + m;
+
+            return ans;
+        }
 };
