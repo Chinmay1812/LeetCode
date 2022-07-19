@@ -19,7 +19,7 @@ public:
         
         for(int i=3;i<=n;i++)
         {
-           v.clear(); 
+           vector<int> v;
            v.push_back(1);
            vector<int> temp=ans.back();
            for(int i=1;i<temp.size();i++)
